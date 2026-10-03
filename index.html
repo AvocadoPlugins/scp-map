@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>SCP:SL Панель Управления</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #1a1a1a; color: white; text-align: center; padding: 50px; }
+        button { background-color: #ff4757; color: white; border: none; padding: 15px 30px; margin: 10px; font-size: 18px; cursor: pointer; border-radius: 5px; }
+        button:hover { background-color: #ff6b81; }
+        .door-btn { background-color: #1e90ff; }
+        .elevator-btn { background-color: #2ed573; }
+    </style>
+</head>
+<body>
+    <h1>Управление Сервером</h1>
+    
+    <button onclick="sendCommand('blackout', '', 15)">⚠️ ВЫКЛЮЧИТЬ СВЕТ НА 15 СЕК</button><br><br>
+
+    <button class="door-btn" onclick="sendCommand('door', 'GateA', 0)">🚪 Открыть/Закрыть Gate A</button>
+    <button class="door-btn" onclick="sendCommand('door', 'GateB', 0)">🚪 Открыть/Закрыть Gate B</button><br><br>
+
+    <button class="elevator-btn" onclick="sendCommand('elevator', 'GateA', 0)">🛗 Вызвать лифт Gate A</button>
+    <button class="elevator-btn" onclick="sendCommand('elevator', 'Nuke', 0)">🛗 Вызвать лифт Боеголовки</button>
+
+    <script>
+        const serverUrl = "http://ru.prostosanya.ru:7710/mapcontrol/";
+
+        function sendCommand(actionType, target, time) {
+            const commandData = {
+                Action: actionType,
+                TargetName: target,
+                Duration: time
+            };
+
+            fetch(serverUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(commandData)
+            })
+            .then(response => response.json())
+            .then(data => alert("Команда отправлена!"))
+            .catch(error => alert("Ошибка подключения к серверу. Порт 7710 открыт?"));
+        }
+    </script>
+</body>
+</html>
