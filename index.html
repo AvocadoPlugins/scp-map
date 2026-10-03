@@ -23,7 +23,7 @@
     <button class="elevator-btn" onclick="sendCommand('elevator', 'Nuke', 0)">🛗 Вызвать лифт Боеголовки</button>
 
     <script>
-        const serverUrl = "http://ru.prostosanya.ru:7710/mapcontrol/";
+        const serverUrl = "http://ru.prostosanya.ru:7711/mapcontrol/";
 
         function sendCommand(actionType, target, time) {
             const commandData = {
@@ -39,7 +39,7 @@
             })
             .then(response => response.json())
             .then(data => alert("Команда отправлена!"))
-            .catch(error => alert("Ошибка подключения к серверу. Порт 7710 открыт?"));
+            .catch(error => alert("Ошибка подключения к серверу. Порт 7711 открыт?"));
         }
     </script>
 </body>
